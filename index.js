@@ -1,15 +1,12 @@
 const express = require('express');
-const { resolve } = require('path');
-
 const app = express();
-const port = 3010;
+const port = process.env.PORT || 5000;
+const myLiffId = process.env.MY_LIFF_ID;
 
-app.use(express.static('static'));
+app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, 'pages/index.html'));
+app.get('/send-id', function(req, res) {
+    res.json({id: myLiffId});
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+app.listen(port, () => console.log(`app listening on port ${port}!`));
